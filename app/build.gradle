@@ -51,4 +51,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-auth'
+
+    //Mask
+    implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
+    implementation 'com.github.santalu:maskara:1.0.0'
 }
