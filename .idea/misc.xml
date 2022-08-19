@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/igorm/AndroidStudioProjects/Olx-clone/app/src/main/res/layout/activity_anuncios.xml" value="0.25" />
+        <entry key="..\:/Users/igorm/AndroidStudioProjects/Olx-clone/app/src/main/res/layout/activity_cadastro.xml" value="0.25" />
+        <entry key="..\:/Users/igorm/AndroidStudioProjects/Olx-clone/app/src/main/res/menu/menu_main.xml" value="0.21388888888888888" />
         <entry key="..\:/Users/imiranda/AndroidStudioProjects/OlxClone/app/src/main/res/drawable/bg_edit_text.xml" value="0.152" />
         <entry key="..\:/Users/imiranda/AndroidStudioProjects/OlxClone/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>

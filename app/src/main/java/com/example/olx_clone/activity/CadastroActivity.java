@@ -1,14 +1,14 @@
 package com.example.olx_clone.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.olx_clone.R;
-import com.example.olx_clone.databinding.ActivityMainBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.olx_clone.databinding.ActivityCadastroBinding;
 import com.example.olx_clone.helper.FirebaseHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,15 +18,15 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-public class MainActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private ActivityCadastroBinding binding;
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityCadastroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         auth = FirebaseHelper.getAuth();
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        Toast.makeText(MainActivity.this,
+                                        Toast.makeText(CadastroActivity.this,
                                                 "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
                                     }else{
                                         String erroExcecao = "";
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                             erroExcecao = "ao cadastrar usuário" + e.getMessage();
                                             e.printStackTrace();
                                         }
-                                        Toast.makeText(MainActivity.this, "ERRO: "+erroExcecao,
+                                        Toast.makeText(CadastroActivity.this, "ERRO: "+erroExcecao,
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -85,12 +85,15 @@ public class MainActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
 
                                         Toast.makeText(
-                                                MainActivity.this, "Logado com sucesso!",
+                                                CadastroActivity.this, "Logado com sucesso!",
                                                 Toast.LENGTH_SHORT).show();
+
+                                        startActivity(new Intent(getApplicationContext(),
+                                                AnunciosActivity.class));
 
                                     }else{
 
-                                        Toast.makeText(MainActivity.this,
+                                        Toast.makeText(CadastroActivity.this,
                                                 "Erro ao fazer login: " + task.getException(),
                                                 Toast.LENGTH_SHORT).show();
 
@@ -101,12 +104,12 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }else{
-                        Toast.makeText(MainActivity.this, "Por favor, informe sua senha",
+                        Toast.makeText(CadastroActivity.this, "Por favor, informe sua senha",
                                 Toast.LENGTH_SHORT).show();
                     }
 
                 }else{
-                    Toast.makeText(MainActivity.this, "Por favor, informe seu E-mail",
+                    Toast.makeText(CadastroActivity.this, "Por favor, informe seu E-mail",
                             Toast.LENGTH_SHORT).show();
                 }
 
