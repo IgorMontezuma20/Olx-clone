@@ -13,11 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    
+
     <style name="botaoPadrao" parent="Theme.AppCompat.Light">
 
         <item name="colorControlHighlight">#d500f9</item>
         <item name="colorButtonNormal">#9C27B0</item>
 
     </style>
+
+    <style name="Theme.OlxClone.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.OlxClone.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.OlxClone.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
