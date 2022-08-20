@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.olx_clone.R;
 import com.example.olx_clone.databinding.ActivityCadastrarAnuncioBinding;
@@ -50,7 +51,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
         binding.btnCadastarAnucio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                salvarAnuncio(view);
+
+                validarDados(view);
             }
         });
 
@@ -79,11 +81,62 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
 
     }
 
-    public void salvarAnuncio(View view){
+    public void validarDados(View view){
+
+        String estado = binding.spinnerEstado.getSelectedItem().toString();
+        String categoria = binding.spinnerCategoria.getSelectedItem().toString();
+        String titulo = binding.edtTitulo.getText().toString();
+        String valor = String.valueOf(binding.edtValor.getRawValue());
+        String telefone = binding.edtTelefone.getText().toString();
+        String fone = binding.edtTelefone.getUnMasked().toString();
+        String descricao = binding.edtDescricao.getText().toString();
+
+        if(listaFotosRecuperadas.size() != 0){
+            if(!estado.isEmpty()){
+                if(!categoria.isEmpty()){
+                    if(!titulo.isEmpty()){
+                        if(!estado.isEmpty()){
+                            if(!valor.isEmpty() && !valor.equals("0")){
+                                if(!telefone.isEmpty() && fone.length() >= 10){
+                                    if(!descricao.isEmpty()){
+                                        salvarAnuncio();
+                                    }else{
+                                        exibirMsgErro("Preencha o campo descrição!.");
+                                    }
+                                }else{
+                                    exibirMsgErro("Preencha o campo telefone!.");
+                                }
+                            }else{
+                                exibirMsgErro("Preencha o campo valor!.");
+                            }
+                        }else{
+                            exibirMsgErro("Preencha o campo estado!.");
+                        }
+                    }else{
+                        exibirMsgErro("Preenca o campo tíutlo!");
+                    }
+                }else{
+                    exibirMsgErro("Preencha o campo categoria!.");
+                }
+            }else{
+                exibirMsgErro("Preencha o campo estado!.");
+            }
+        }else{
+            exibirMsgErro("Selecione ao menos uma foto!");
+        }
+
+    }
+
+    private void exibirMsgErro(String mensagem){
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    public void salvarAnuncio(){
 
         String telefone = binding.edtTelefone.getText().toString();
         Log.v("salvar", "salvarAnuncio: "+telefone);
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
