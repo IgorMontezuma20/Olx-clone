@@ -33,7 +33,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity {
 
     public void salvarAnuncio(View view){
 
-        String valor = binding.edtValor.getHintString();
-        Log.d("salvar", "salvarAnuncio: "+valor);
+        String telefone = binding.edtTelefone.getText().toString();
+        Log.v("salvar", "salvarAnuncio: "+telefone);
     }
 }

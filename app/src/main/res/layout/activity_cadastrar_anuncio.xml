@@ -62,11 +62,12 @@
     <EditText
         android:id="@+id/edtTitulo"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
+        android:padding="10dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Título"
+        android:hint="Título:"
         android:inputType="textPersonName"
         android:paddingStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,8 +77,9 @@
     <com.blackcat.currencyedittext.CurrencyEditText
         android:id="@+id/edtValor"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:padding="10dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Valor"
@@ -92,14 +94,32 @@
         android:layout_width="340dp"
         android:layout_height="90dp"
         android:layout_marginTop="16dp"
+        android:padding="10dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Descrição"
+        android:hint="Descrição:"
         android:inputType="textPersonName"
         android:paddingStart="8dp"
         app:layout_constraintEnd_toEndOf="@+id/edtValor"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/edtValor"
-        app:layout_constraintTop_toBottomOf="@+id/edtValor" />
+        app:layout_constraintTop_toBottomOf="@+id/edtTelefone" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/edtTelefone"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:inputType="phone"
+        android:hint="Telefone:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtValor"
+        app:mask="(__) _____-____"
+        app:maskCharacter="_"
+        app:maskStyle="completable"
+        android:background="@drawable/bg_edit_text"/>
 
     <Button
         android:id="@+id/btnCadastarAnucio"
