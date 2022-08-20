@@ -25,6 +25,7 @@ import com.example.olx_clone.databinding.ActivityCadastrarAnuncioBinding;
 import com.example.olx_clone.databinding.ActivityCadastroBinding;
 import com.example.olx_clone.databinding.ActivityMeusAnunciosBinding;
 import com.example.olx_clone.helper.Permissoes;
+import com.example.olx_clone.model.Anuncio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.List;
 public class CadastrarAnuncioActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ActivityCadastrarAnuncioBinding binding;
+    private Anuncio anuncio = new Anuncio();
 
     private String[] persmissions = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -81,24 +83,48 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
 
     }
 
-    public void validarDados(View view){
+    public void salvarAnuncio(){
+
+        for(int i = 0; i < listaFotosRecuperadas.size(); i++){
+            String urlImagem = listaFotosRecuperadas.get(i);
+            int tamanhoLista = listaFotosRecuperadas.size();
+            //salvaFotoStorage(urlImagem, tamanhoLista, i);
+        }
+
+    }
+
+    private Anuncio configurarAnuncio(){
 
         String estado = binding.spinnerEstado.getSelectedItem().toString();
         String categoria = binding.spinnerCategoria.getSelectedItem().toString();
         String titulo = binding.edtTitulo.getText().toString();
         String valor = String.valueOf(binding.edtValor.getRawValue());
         String telefone = binding.edtTelefone.getText().toString();
-        String fone = binding.edtTelefone.getUnMasked().toString();
         String descricao = binding.edtDescricao.getText().toString();
 
+        Anuncio anuncio = new Anuncio();
+        anuncio.setEstado(estado);
+        anuncio.setCategoria(categoria);
+        anuncio.setTitulo(titulo);
+        anuncio.setValor(valor);
+        anuncio.setTelefone(telefone);
+        anuncio.setDescricao(descricao);
+
+        return  anuncio;
+
+    }
+
+    public void validarDados(View view){
+
+       anuncio = configurarAnuncio();
+
         if(listaFotosRecuperadas.size() != 0){
-            if(!estado.isEmpty()){
-                if(!categoria.isEmpty()){
-                    if(!titulo.isEmpty()){
-                        if(!estado.isEmpty()){
-                            if(!valor.isEmpty() && !valor.equals("0")){
-                                if(!telefone.isEmpty() && fone.length() >= 10){
-                                    if(!descricao.isEmpty()){
+            if(!anuncio.getEstado().isEmpty()){
+                if(!anuncio.getCategoria().isEmpty()){
+                    if(!anuncio.getTitulo().isEmpty()){
+                            if(!anuncio.getValor().isEmpty() && !anuncio.getValor().equals("0")){
+                                if(!anuncio.getTelefone().isEmpty()){
+                                    if(!anuncio.getDescricao().isEmpty()){
                                         salvarAnuncio();
                                     }else{
                                         exibirMsgErro("Preencha o campo descrição!.");
@@ -109,9 +135,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
                             }else{
                                 exibirMsgErro("Preencha o campo valor!.");
                             }
-                        }else{
-                            exibirMsgErro("Preencha o campo estado!.");
-                        }
+
                     }else{
                         exibirMsgErro("Preenca o campo tíutlo!");
                     }
@@ -129,12 +153,6 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
 
     private void exibirMsgErro(String mensagem){
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
-    }
-
-    public void salvarAnuncio(){
-
-        String telefone = binding.edtTelefone.getText().toString();
-        Log.v("salvar", "salvarAnuncio: "+telefone);
     }
 
 
