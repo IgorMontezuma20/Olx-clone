@@ -44,16 +44,16 @@
         app:srcCompat="@drawable/padrao" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
+        android:id="@+id/spinnerEstado"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/ivAnuncio1"
         app:layout_constraintTop_toBottomOf="@+id/ivAnuncio1" />
 
     <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
+        android:id="@+id/spinnerCategoria"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/ivAnuncio3"
@@ -72,7 +72,7 @@
         android:paddingStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerEstado" />
 
     <com.blackcat.currencyedittext.CurrencyEditText
         android:id="@+id/edtValor"

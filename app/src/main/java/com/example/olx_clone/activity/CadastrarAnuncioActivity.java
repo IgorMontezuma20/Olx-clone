@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.example.olx_clone.R;
 import com.example.olx_clone.databinding.ActivityCadastrarAnuncioBinding;
@@ -56,6 +57,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
         binding.ivAnuncio1.setOnClickListener(this);
         binding.ivAnuncio2.setOnClickListener(this);
         binding.ivAnuncio3.setOnClickListener(this);
+
+        carregarDadosSpinner();
 
     }
 
@@ -120,6 +123,21 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
             listaFotosRecuperadas.add(imagePath);
         }
 
+    }
+
+    private void carregarDadosSpinner(){
+        //Configuração spinner Estados
+        String[] estados = getResources().getStringArray(R.array.estados);
+        ArrayAdapter<String> adapterEstados = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, estados);
+        adapterEstados.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerEstado.setAdapter(adapterEstados);
+
+        String[] categorias = getResources().getStringArray(R.array.categorias);
+        ArrayAdapter<String> adapterCategoria = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, categorias);
+        adapterCategoria.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerCategoria.setAdapter(adapterCategoria);
     }
 
     private void validationPermissionAlert(){
