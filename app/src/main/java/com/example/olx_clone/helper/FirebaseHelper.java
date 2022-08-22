@@ -12,6 +12,13 @@ public class FirebaseHelper {
     private static DatabaseReference databaseReference;
     private static StorageReference storageReference;
 
+    public static String getUid(){
+
+        FirebaseAuth auth = getAuth();
+        return  auth.getCurrentUser().getUid();
+
+    }
+
     public static StorageReference getStorageReference(){
         if(storageReference == null){
             storageReference = FirebaseStorage.getInstance().getReference();

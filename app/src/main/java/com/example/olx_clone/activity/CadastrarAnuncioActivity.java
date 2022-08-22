@@ -50,6 +50,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
     };
 
     private List<String> listaFotosRecuperadas = new ArrayList<>();
+    private List<String> listaUrlFotos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,34 +108,42 @@ public class CadastrarAnuncioActivity extends AppCompatActivity implements View.
     }
 
 
-    private void salvaFotoStorage(String urlString, int tamanhoLista, int contador) {
+    private void salvaFotoStorage(String urlImagem, int totalFotos, int contador) {
 
-        //criar nó storage
-        StorageReference imgRef = storage.child("imagens")
+        // Cria nó no Storage
+        StorageReference imagemAnuncio = storage
+                .child("imagens")
                 .child("anuncios")
                 .child(anuncio.getIdAnuncio())
-                .child("imagem"+contador);
+                .child("imagem" + contador);
 
-        //Fazer upload do arquivo
-        UploadTask uploadTask = imgRef.putFile(Uri.parse(urlString));
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        //Upload do arquivo
+        final StorageReference imagemRef = imagemAnuncio.child(listaFotosRecuperadas+".jpeg");
 
-                imgRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+        UploadTask uploadTask = imagemRef.putFile(Uri.parse(urlImagem));
+        uploadTask.addOnSuccessListener(CadastrarAnuncioActivity.this,
+                (OnSuccessListener)(uploadTask),
+                imagemRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        Task<Uri> url = taskSnapshot.getStorage().getDownloadUrl();
 
-                        //String urlConvertida = url.toString();
+                        Uri url = task.getResult();
+                        String urlConvertida = url.toString();
+
+                        listaUrlFotos.add(urlConvertida);
+
+                        if(totalFotos == listaUrlFotos.size()){
+
+                            anuncio.setFotos(listaUrlFotos);
+                            anuncio.salvar();
+
+                        }
                     }
-                });
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                exibirMsgErro("Falha ao fazer o upload.");
+
+                exibirMsgErro("Erro ao salvar imagem");
             }
         });
 

@@ -13,6 +13,7 @@ public class Anuncio {
     private String titulo;
     private String valor;
     private String telefone;
+    private String urlImagem;
     private String descricao;
     private List<String> fotos;
 
@@ -20,6 +21,25 @@ public class Anuncio {
         DatabaseReference anuncioRef = FirebaseHelper.getDatabaseReference()
                 .child("meus_anuncios");
         setIdAnuncio(anuncioRef.push().getKey());
+    }
+
+    public void salvar(){
+
+        String uId = FirebaseHelper.getUid();
+        DatabaseReference anuncioRef = FirebaseHelper.getDatabaseReference()
+                .child("meus_anuncios");
+
+        anuncioRef.child(uId)
+                .child(getIdAnuncio())
+                .setValue(this);
+    }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
     }
 
     public String getIdAnuncio() {
