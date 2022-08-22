@@ -1,5 +1,8 @@
 package com.example.olx_clone.model;
 
+import com.example.olx_clone.helper.FirebaseHelper;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.List;
 
 public class Anuncio {
@@ -14,7 +17,9 @@ public class Anuncio {
     private List<String> fotos;
 
     public Anuncio() {
-
+        DatabaseReference anuncioRef = FirebaseHelper.getDatabaseReference()
+                .child("meus_anuncios");
+        setIdAnuncio(anuncioRef.push().getKey());
     }
 
     public String getIdAnuncio() {
